@@ -5,6 +5,8 @@ import { UsersModule } from './users/users.module';
 import { AppService } from './app.service';
 import { RolesModule } from './roles/roles.module';
 import { AppController } from './app.controller';
+import { PermissionsModule } from './permissions/permissions.module';
+import { GamesModule } from './games/games.module';
 
 type SupportedDbTypes =
     | 'mysql'
@@ -33,6 +35,8 @@ type SupportedDbTypes =
                 synchronize: configService.get<boolean>('DB_SYNCHRONIZE') ?? false,
             }),
         }),
+        PermissionsModule,
+        GamesModule,
     ],
     controllers: [AppController],
     providers: [AppService],
