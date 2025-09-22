@@ -27,11 +27,11 @@ export class UsersService {
         return await this.userRepository.save(newUser);
     }
 
-    findAll() {
+    findAll(): Promise<User[]> {
         return this.userRepository.find();
     }
 
-    findOne(id: number) {
+    findOne(id: number): Promise<User | null> {
         return this.userRepository.findOne({ where: { id } });
     }
 

@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException } from '@nestjs/common';
 import { GamesService } from './games.service';
 import { CreateGameDto } from './dto/create-game.dto';
 import { UpdateGameDto } from './dto/update-game.dto';
@@ -9,7 +9,14 @@ export class GamesController {
 
   @Post()
   create(@Body() createGameDto: CreateGameDto) {
-    return this.gamesService.create(createGameDto);
+
+    const result = this.gamesService.create(createGameDto)
+  
+    if(!result){
+      throw new NotFoundException(`User with id: ${createGameDto.userId} not found`)
+    }
+    
+
   }
 
   @Get()

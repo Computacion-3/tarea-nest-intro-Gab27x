@@ -1,26 +1,53 @@
 import { Injectable } from '@nestjs/common';
 import { CreateGameDto } from './dto/create-game.dto';
 import { UpdateGameDto } from './dto/update-game.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Game } from './entities/game.entity';
+import { Repository } from 'typeorm';
+import { UsersService } from 'src/users/users.service';
 
 @Injectable()
 export class GamesService {
-  create(createGameDto: CreateGameDto) {
-    return 'This action adds a new game';
+
+  constructor(
+    @InjectRepository(Game)
+    private readonly gameRepository: Repository<Game>,
+    private readonly userService: UsersService
+  ){}
+
+  async create(createGameDto: CreateGameDto): Promise<Game | null> {
+    const user = await this.userService.findOne(createGameDto.userId)
+    
+    if (!user){
+      return null
+    }
+
+    const newGame = this.gameRepository.create(createGameDto)
+
+    newGame.user = user
+    return await this.gameRepository.save(newGame)
   }
 
-  findAll() {
-    return `This action returns all games`;
+  async  findAll(): Promise<Game[]> {
+ 
+    return await this.gameRepository.find()
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} game`;
+  async  findOne(id: number): Promise<Game | null>{
+    return await this.gameRepository.findOneBy({id})
   }
 
-  update(id: number, updateGameDto: UpdateGameDto) {
-    return `This action updates a #${id} game`;
+  async  update(id: number, updateGameDto: UpdateGameDto) {
+    
+    await this.gameRepository.update(id,updateGameDto) 
+    return  this.findOne(id)
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} game`;
+  async  remove(id: number) {
+    const result = await this.gameRepository.delete(id)
+    if(result.affected){
+      return {id}
+    }
+    return null
   }
 }
