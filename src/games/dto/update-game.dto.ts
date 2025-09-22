@@ -1,4 +1,6 @@
-import { PartialType } from '@nestjs/mapped-types';
+import { OmitType, PartialType } from '@nestjs/mapped-types';
 import { CreateGameDto } from './create-game.dto';
 
-export class UpdateGameDto extends PartialType(CreateGameDto) {}
+export class UpdateGameDto extends PartialType(
+  OmitType(CreateGameDto, ['userId'] as const),
+) {}

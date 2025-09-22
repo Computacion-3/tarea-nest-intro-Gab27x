@@ -1,3 +1,20 @@
+# **Test de lo implementado**
+## Screenshots
+
+![Imagen 1](images/image1.png)
+![Imagen 2](images/image2.png)
+![Imagen 3](images/image3.png)
+![Imagen 4](images/image4.png)
+![Imagen 5](images/image5.png)
+![Imagen 6](images/image6.png)
+![Imagen 7](images/image7.png)
+![Imagen 8](images/image8.png)
+
+
+
+
+
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
 </p>
