@@ -1,1 +1,7 @@
-export class CreatePermissionDto {}
+export class CreatePermissionDto {
+
+	name: string
+	description?: string
+
+
+}
