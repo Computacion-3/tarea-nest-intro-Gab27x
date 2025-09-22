@@ -11,6 +11,19 @@
 ![Imagen 8](images/image8.png)
 
 
+Variables de **.env**
+```bash 
+PORT = 3000
+DB_TYPE  =  'postgres'
+DB_HOST =  'localhost' 
+DB_PORT =  5432
+DB_USERNAME = root
+DB_PASSWORD = root
+DB_DATABASE = games 
+DB_SYNCHRONIZE = true
+
+```
+
 
 
 
